@@ -8,7 +8,7 @@ import java.sql.Statement;
 public class ConexionDB {
 	private Connection conexion;
 	private Statement st;
-	static String user="";
+	static String user="root";
 	static String password="";
 
 	public Statement conectar() {
