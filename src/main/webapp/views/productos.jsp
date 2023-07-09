@@ -37,17 +37,8 @@
                             <input type="text" class="form-control mb-2">
                             <label for="descripcionProducto" class="form-label">Descripción</label>
                             <input type="text" class="form-control mb-2">
-                            <label for="stockProducto" class="form-label">Cantidad</label>
-                            <input type="number" class="form-control mb-2">
-                            <label for="precioProducto" class="form-label">Precio</label>
-                            <input type="number" class="form-control mb-2">
-                            <label for="proveedorProducto" class="form-label">Proveedor</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Seleccione un proveedor</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
+                            <label for="marcaProducto" class="form-label">Marca</label>
+                            <input type="text" class="form-control mb-2">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -62,27 +53,20 @@
                 <table class="table text-center w-100">
                     <thead>
                         <tr class="table-light">
-                            <th scope="col">Proveedor</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Descripción</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Acciones</th>
+                            <th scope="col">Marca</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
                         <%
 	                        ConexionDB conn = new ConexionDB();
 	                        Statement st = conn.conectar();
-	                        ResultSet rs = st.executeQuery("select * from vw_producto_select");
+	                        ResultSet rs = st.executeQuery("select Nombre, Descripcion, Marca from productos");
 	
 	                        while(rs.next()){
 	                            out.println("<tr>");
 	                                                    
-	                            out.println("<td>");
-	                            out.println(rs.getString("Proveedor"));
-	                            out.println("</td>");
-	                            
 	                            out.println("<td>");
 	                            out.println(rs.getString("Nombre"));
 	                            out.println("</td>");
@@ -92,13 +76,9 @@
 	                            out.println("</td>");
 	                            
 	                            out.println("<td>");
-	                            out.println(rs.getInt("Stock"));
+	                            out.println(rs.getString("Marca"));
 	                            out.println("</td>");
-	                            
-	                            out.println("<td>");
-	                            out.println("$" + rs.getInt("Precio"));
-	                            out.println("</td>");
-	                            
+	                            	                            
 	                            out.println("<td>");
 	                            out.println("<button class='btn btn-sm btn-warning rounded-circle mx-1'><i class='bi bi-pencil-fill text-white'></i></button>");
 	                            out.println("<button class='btn btn-sm btn-danger rounded-circle mx-1'><i class='bi bi-trash3-fill'></i></button>");

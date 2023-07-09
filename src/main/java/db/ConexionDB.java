@@ -10,7 +10,7 @@ public class ConexionDB {
 	private Statement st;
 	static String user="root";
 	static String password="";
-
+	
 	public Statement conectar() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
