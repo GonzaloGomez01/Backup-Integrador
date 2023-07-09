@@ -37,31 +37,31 @@
 		                        <div class="modal-body">
 		                        	<form action="../controller/insertUser.jsp" method="post" class="needs-validation" novalidate>
 			                        	<div class="form-group has-validated">
-				                            <input type="text" name="nombre" id="nombre" class="form-control mb-2" placeholder="Nombre" required>
+				                            <input type="text" name="nombre" id="nombre" class="form-control form-control-sm mb-2" placeholder="Nombre" required>
 				                            <div class="invalid-feedback mb-2">
             									Ingrese el nombre
             								</div>
 				                        </div>
 				                        <div class="form-group has-validated">
-				                            <input type="text" name="apellido" id="apellido" class="form-control mb-2" placeholder="Apellido" required>
+				                            <input type="text" name="apellido" id="apellido" class="form-control form-control-sm mb-2" placeholder="Apellido" required>
 				                            <div class="invalid-feedback mb-2">
             									Ingrese el apellido
             								</div>
 				                        </div>
 				                        <div class="form-group has-validated">
-				                            <input type="email" name="correo" id="correo" class="form-control mb-2" placeholder="Correo Electrónico" required>
+				                            <input type="email" name="correo" id="correo" class="form-control form-control-sm mb-2" placeholder="Correo Electrónico" required>
 				                            <div class="invalid-feedback mb-2">
             									Ingrese el correo electrónico
             								</div>
 										</div>
 										<div class="form-group has-validated">                         
-				                            <input type="password" name="pass" id="pass" class="form-control mb-2" placeholder="Contraseña" required>
+				                            <input type="password" name="pass" id="pass" class="form-control form-control-sm mb-2" placeholder="Contraseña" required>
 				                            <div class="invalid-feedback mb-2">
             									Ingrese la contraseña
             								</div>
 				                        </div>
 				                        <div class="form-group">
-				                            <input type="password" class="form-control mb-2" placeholder="Confirmar Contraseña">
+				                            <input type="password" class="form-control form-control-sm mb-2" placeholder="Confirmar Contraseña">
 				                        </div>
 				                        <div class="d-flex justify-content-end">  
 					                        <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">Cancelar</button>
@@ -92,22 +92,27 @@
 	
 	                        while(rs.next()){
 	                            out.println("<tr>");
+	                            
+	                            Integer id = rs.getInt("idUsuario");
 	                                                    
 	                            out.println("<td>");
-	                            out.println(rs.getString("Nombre"));
+	                            String nombre = rs.getString("Nombre");
+	                            out.println(nombre);
 	                            out.println("</td>");
 	                            
 	                            out.println("<td>");
-	                            out.println(rs.getString("Apellido"));
+	                            String apellido = rs.getString("Apellido");
+	                            out.println(apellido);
 	                            out.println("</td>");
 	                            
 	                            out.println("<td>");
-	                            out.println(rs.getString("Mail"));
+	                            String mail = rs.getString("Mail");
+	                            out.println(mail);
 	                            out.println("</td>");
 	                                                        
 	                            out.println("<td>");
-	                            out.println("<button class='btn btn-sm btn-warning rounded-circle mx-1'><i class='bi bi-pencil-fill text-white'></i></button>");
-	                            out.println("<button class='btn btn-sm btn-danger rounded-circle mx-1'><i class='bi bi-trash3-fill'></i></button>");
+	                            out.println("<button class='btn btn-sm btn-warning rounded-circle mx-1' data-bs-toggle='modal' data-bs-target='#updateModal' id='"+id+"' nombre='"+nombre+"' apellido='"+apellido+"' mail='"+mail+"'><i class='bi bi-pencil-fill text-white'></i></button>");
+	                            out.println("<button class='btn btn-sm btn-danger rounded-circle mx-1' data-bs-toggle='modal' data-bs-target='#deleteModal' id='"+id+"' nombre='"+nombre+"' apellido='"+apellido+"'><i class='bi bi-trash3-fill'></i></button>");
 	                            out.println("</td>");
 	                            
 	                            out.println("</tr>");
@@ -117,7 +122,77 @@
             	</table>
             </div>            
         </div>
+		
+		<!-- delete modal -->
+		<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar usuario</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      	<form action="../controller/deleteUser.jsp" method="post">
+			    	<input type="hidden" name="idUser" id="idUser">
+				      <div class="modal-body text-center">
+				          <div class="mb-3">
+				            <label for="recipient-name" class="col-form-label">¿Desea eliminar el usuario?</label>
+				            <div id="dataUser" class="text-danger"></div>
+				          </div>			        
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+				        <input type="submit" class="btn btn-primary" value="Eliminar">
+				      </div>
+			    </form>
+		    </div>
+		  </div>
+		</div>
+		
+		<!-- update modal -->
+		<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar usuario</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      	<form action="../controller/updateUser.jsp" method="post" class="needs-validation" novalidate>
+			    	<input type="hidden" name="idUser" id="idUser">
+				      <div class="modal-body">
+	                  	<div class="form-group has-validated">
+	                  		<label for="nombre" class="form-label">Nombre:</label>
+	                        <input type="text" name="nombre" id="nombre" class="form-control form-control-sm mb-2" required>
+	                        <div class="invalid-feedback mb-2">
+	    						Ingrese el nombre
+	   						</div>
+	                   	</div>
+	                    <div class="form-group has-validated">
+	                    	<label for="apellido" class="form-label">Apellido:</label>
+	                    	<input type="text" name="apellido" id="apellido" class="form-control form-control-sm mb-2" required>
+	                    	<div class="invalid-feedback mb-2">
+	       						Ingrese el apellido
+	       					</div>
+	                    </div>
+	                    <div class="form-group has-validated">
+	                    	<label for="mail" class="form-label">Correo electrónico:</label>
+	                    	<input type="email" name="correo" id="correo" class="form-control form-control-sm mb-2" required>
+	                    	<div class="invalid-feedback mb-2">
+	       						Ingrese el correo electrónico
+	       					</div>
+						</div>		        
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+				        <input type="submit" class="btn btn-primary" value="Modificar">
+				      </div>
+			    </form>
+		    </div>
+		  </div>
+		</div>
+		
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
         <script src="../scripts/validacionLogin.js"></script>
+		<script src="../scripts/delUsuario.js"></script>        
+		<script src="../scripts/updUsuario.js"></script>        
     </body>
 </html>
