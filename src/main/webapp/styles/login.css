@@ -8,7 +8,7 @@ body{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background:  rgba(2,0,36,1);
+	background: radial-gradient(circle, rgba(242,169,38,1) 0%, rgba(215,215,215,1) 75%);
 }
 
 .login{
@@ -16,7 +16,7 @@ body{
 	height: min-content;
 	padding: 20px;
 	border-radius: 12px;
-	background:  rgba(65,0,255,1);
+	background:  rgb(237, 236, 236);
 }
 
 .login form .form-group{

@@ -33,3 +33,13 @@ body h1{
     border-right: 1px solid #080808;
     padding: 4px;
 }
+
+.btn-personalizado {
+	background-color: rgba(242, 169, 38, 0.7473420642671131);
+	color:white;
+}
+
+.btn-personalizado:hover {
+	background-color: rgba(242, 169, 38);
+	color:white;
+}

@@ -22,7 +22,7 @@
 
         <div class="container pt-5">
             <div class="d-flex justify-content-end my-2">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar usuario</button>
+                <button type="button" class="btn btn-personalizado" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar usuario</button>
             </div>
 
             <!-- Modal -->
@@ -30,45 +30,28 @@
 	            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	                <div class="modal-dialog modal-dialog-scrollable">
 	                    <div class="modal-content">
-	                        <div class="modal-header">
+	                        <div class="modal-header bg-success text-white" data-bs-theme="dark">
 	                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar usuario</h1>
 	                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	                        </div>	                        
-		                        <div class="modal-body">
-		                        	<form action="../controller/insertUser.jsp" method="post" class="needs-validation" novalidate>
-			                        	<div class="form-group has-validated">
-				                            <input type="text" name="nombre" id="nombre" class="form-control form-control-sm mb-2" placeholder="Nombre" required>
-				                            <div class="invalid-feedback mb-2">
-            									Ingrese el nombre
-            								</div>
-				                        </div>
-				                        <div class="form-group has-validated">
-				                            <input type="text" name="apellido" id="apellido" class="form-control form-control-sm mb-2" placeholder="Apellido" required>
-				                            <div class="invalid-feedback mb-2">
-            									Ingrese el apellido
-            								</div>
-				                        </div>
-				                        <div class="form-group has-validated">
-				                            <input type="email" name="correo" id="correo" class="form-control form-control-sm mb-2" placeholder="Correo Electrónico" required>
-				                            <div class="invalid-feedback mb-2">
-            									Ingrese el correo electrónico
-            								</div>
-										</div>
-										<div class="form-group has-validated">                         
-				                            <input type="password" name="pass" id="pass" class="form-control form-control-sm mb-2" placeholder="Contraseña" required>
-				                            <div class="invalid-feedback mb-2">
-            									Ingrese la contraseña
-            								</div>
-				                        </div>
-				                        <div class="form-group">
-				                            <input type="password" class="form-control form-control-sm mb-2" placeholder="Confirmar Contraseña">
-				                        </div>
-				                        <div class="d-flex justify-content-end">  
-					                        <button type="button" class="btn btn-secondary m-2" data-bs-dismiss="modal">Cancelar</button>
-			                            	<button type="submit" class="btn btn-primary m-2">Agregar</button>
-		                            	</div>
-		                            </form>				                	            
-		                        </div>          
+	                        </div>
+	                        <form action="../controller/insertUser.jsp" onsubmit="return validarCamposVacios()" method="post">	                        
+		                        <div class="modal-body">		
+									<input type="text" name="nombre" id="nombre" onkeyup="primerLetraMayuscula('nombre', 'msjNombre')" class="form-control form-control-sm mb-2" placeholder="Nombre">
+									<div id="msjNombre"></div>                 	
+									<input type="text" name="apellido" id="apellido" onkeyup="primerLetraMayuscula('apellido', 'msjApellido')" class="form-control form-control-sm mb-2" placeholder="Apellido">
+									<div id="msjApellido"></div>
+									<input type="email" name="correo" id="correo" onkeyup="validarCorreo()" class="form-control form-control-sm mb-2" placeholder="Correo Electrónico">
+									<div id="msjMail"></div>
+									<input type="password" name="pass" id="pass" onkeyup="fortPass()" class="form-control form-control-sm mb-2" placeholder="Contraseña">
+				                    <div id="msjPass"></div>
+									<input type="password" name="passConfirm" id="passConfirm" onkeyup="matchPass()" class="form-control form-control-sm mb-2" placeholder="Confirmar Contraseña">
+									<div id="msjPassConfirm"></div>
+		                        </div>
+		                        <div class="modal-footer">  
+					            	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+			                    	<input type="submit" class="btn btn-success" value="Agregar">
+		                        </div>	
+		                	</form>          
 	                    </div>
 	                </div>
 	            </div>
@@ -111,7 +94,7 @@
 	                            out.println("</td>");
 	                                                        
 	                            out.println("<td>");
-	                            out.println("<button class='btn btn-sm btn-warning rounded-circle mx-1' data-bs-toggle='modal' data-bs-target='#updateModal' id='"+id+"' nombre='"+nombre+"' apellido='"+apellido+"' mail='"+mail+"'><i class='bi bi-pencil-fill text-white'></i></button>");
+	                            out.println("<button class='btn btn-sm btn-primary rounded-circle mx-1' data-bs-toggle='modal' data-bs-target='#updateModal' id='"+id+"' nombre='"+nombre+"' apellido='"+apellido+"' mail='"+mail+"'><i class='bi bi-pencil-fill text-white'></i></button>");
 	                            out.println("<button class='btn btn-sm btn-danger rounded-circle mx-1' data-bs-toggle='modal' data-bs-target='#deleteModal' id='"+id+"' nombre='"+nombre+"' apellido='"+apellido+"'><i class='bi bi-trash3-fill'></i></button>");
 	                            out.println("</td>");
 	                            
@@ -127,7 +110,7 @@
 		<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
-		      <div class="modal-header">
+		      <div class="modal-header bg-danger text-white" data-bs-theme="dark">
 		        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar usuario</h1>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
@@ -141,7 +124,7 @@
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-				        <input type="submit" class="btn btn-primary" value="Eliminar">
+				        <input type="submit" class="btn btn-danger" value="Eliminar">
 				      </div>
 			    </form>
 		    </div>
@@ -152,7 +135,7 @@
 		<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
-		      <div class="modal-header">
+		      <div class="modal-header bg-primary text-white" data-bs-theme="dark">
 		        <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar usuario</h1>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
@@ -193,6 +176,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
         <script src="../scripts/validacionLogin.js"></script>
 		<script src="../scripts/delUsuario.js"></script>        
-		<script src="../scripts/updUsuario.js"></script>        
+		<script src="../scripts/updUsuario.js"></script>
+		<script src="../scripts/registro.js"></script>        
     </body>
 </html>
