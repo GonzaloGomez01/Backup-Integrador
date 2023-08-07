@@ -40,7 +40,7 @@
 									<div id="msjNombre"></div>                 	
 									<input type="text" name="apellido" id="apellido" onkeyup="primerLetraMayuscula('apellido', 'msjApellido')" class="form-control form-control-sm mb-2" placeholder="Apellido">
 									<div id="msjApellido"></div>
-									<input type="email" name="correo" id="correo" onkeyup="validarCorreo()" class="form-control form-control-sm mb-2" placeholder="Correo Electrónico">
+									<input type="email" name="correo" id="correo" onkeyup="validarCorreo('correo', 'msjMail')" class="form-control form-control-sm mb-2" placeholder="Correo Electrónico">
 									<div id="msjMail"></div>
 									<input type="password" name="pass" id="pass" onkeyup="fortPass()" class="form-control form-control-sm mb-2" placeholder="Contraseña">
 				                    <div id="msjPass"></div>
@@ -139,30 +139,18 @@
 		        <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar usuario</h1>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
-		      	<form action="../controller/updateUser.jsp" method="post" class="needs-validation" novalidate>
-			    	<input type="hidden" name="idUser" id="idUser">
+		      	<form action="../controller/updateUser.jsp" onsubmit="return validarCamposVaciosUpd()" method="post">
+			    	 <input type="hidden" name="idUser" id="idUser">
 				      <div class="modal-body">
-	                  	<div class="form-group has-validated">
 	                  		<label for="nombre" class="form-label">Nombre:</label>
-	                        <input type="text" name="nombre" id="nombre" class="form-control form-control-sm mb-2" required>
-	                        <div class="invalid-feedback mb-2">
-	    						Ingrese el nombre
-	   						</div>
-	                   	</div>
-	                    <div class="form-group has-validated">
+	                        <input type="text" name="nombreUpd" id="nombreUpd" onkeyup="primerLetraMayuscula('nombreUpd', 'msjNombreUpd')" class="form-control form-control-sm mb-2">
+	                        <div id="msjNombreUpd"></div>
 	                    	<label for="apellido" class="form-label">Apellido:</label>
-	                    	<input type="text" name="apellido" id="apellido" class="form-control form-control-sm mb-2" required>
-	                    	<div class="invalid-feedback mb-2">
-	       						Ingrese el apellido
-	       					</div>
-	                    </div>
-	                    <div class="form-group has-validated">
+	                    	<input type="text" name="apellidoUpd" id="apellidoUpd" onkeyup="primerLetraMayuscula('apellidoUpd', 'msjApellidoUpd')" class="form-control form-control-sm mb-2">
+	                    	<div id="msjApellidoUpd"></div>
 	                    	<label for="mail" class="form-label">Correo electrónico:</label>
-	                    	<input type="email" name="correo" id="correo" class="form-control form-control-sm mb-2" required>
-	                    	<div class="invalid-feedback mb-2">
-	       						Ingrese el correo electrónico
-	       					</div>
-						</div>		        
+	                    	<input type="email" name="correoUpd" id="correoUpd" onkeyup="validarCorreo('correoUpd', 'msjCorreoUpd')" class="form-control form-control-sm mb-2">
+	                    	<div id="msjCorreoUpd"></div>	        
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -172,6 +160,7 @@
 		    </div>
 		  </div>
 		</div>
+		
 		
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
         <script src="../scripts/validacionLogin.js"></script>

@@ -3,9 +3,9 @@
 <%@page import="db.ConexionDB" %>
 <%
 	String id = request.getParameter("idUser");
-	String nombre = request.getParameter("nombre");
-	String apellido = request.getParameter("apellido");
-	String correo = request.getParameter("correo");
+	String nombre = request.getParameter("nombreUpd");
+	String apellido = request.getParameter("apellidoUpd");
+	String correo = request.getParameter("correoUpd");
 			
 	try {
 		ConexionDB con = new ConexionDB();

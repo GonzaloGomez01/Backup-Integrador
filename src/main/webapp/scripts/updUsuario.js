@@ -12,14 +12,14 @@ if (updateModal) {
     const apellido = button.getAttribute('apellido')
     const mail = button.getAttribute('mail')
     
-    const inputNombre = updateModal.querySelector('#nombre')
-    const inputApellido = updateModal.querySelector('#apellido')
-    const inputCorreo = updateModal.querySelector('#correo')
+    const inputNombre = updateModal.querySelector('#nombreUpd')
+    const inputApellido = updateModal.querySelector('#apellidoUpd')
+    const inputCorreo = updateModal.querySelector('#correoUpd')
     
     inputNombre.value = nombre
     inputApellido.value = apellido
     inputCorreo.value = mail
-
+    
     //const dataUser = updateModal.querySelector('.modal-body #dataUser')
 
     //dataUser.innerHTML = nombre + " " + apellido
